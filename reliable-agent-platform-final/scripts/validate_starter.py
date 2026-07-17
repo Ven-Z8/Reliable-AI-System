@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
 import sys
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -38,13 +38,9 @@ def main() -> int:
             errors.append(f"invalid JSON {schema_path.relative_to(ROOT)}: {exc}")
             continue
         if value.get("$schema") != "https://json-schema.org/draft/2020-12/schema":
-            errors.append(
-                f"{schema_path.relative_to(ROOT)} does not declare JSON Schema 2020-12"
-            )
+            errors.append(f"{schema_path.relative_to(ROOT)} does not declare JSON Schema 2020-12")
         if value.get("additionalProperties") is not False:
-            errors.append(
-                f"{schema_path.relative_to(ROOT)} must reject unknown top-level fields"
-            )
+            errors.append(f"{schema_path.relative_to(ROOT)} must reject unknown top-level fields")
 
     example_dir = ROOT / "examples" / "contracts"
     for example_path in sorted(example_dir.glob("*.json")):
