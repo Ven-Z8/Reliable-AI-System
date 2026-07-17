@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "task_id": "task-001",
+  "task": "Add a deterministic mock worker.",
+  "goal_id": "milestone-01",
+  "repository": {
+    "path": ".",
+    "revision": "main",
+    "clean_required": true
+  },
+  "worker": "mock",
+  "allowed_paths": [
+    "src/reliable_agent_platform/contracts/**",
+    "src/reliable_agent_platform/worker_adapters/**",
+    "tests/**"
+  ],
+  "denied_paths": [
+    ".env",
+    ".git/**"
+  ],
+  "allowed_commands": [
+    "pytest",
+    "ruff",
+    "mypy"
+  ],
+  "denied_commands": [
+    "git push",
+    "rm -rf /"
+  ],
+  "required_checks": [
+    "make lint",
+    "make typecheck",
+    "make test"
+  ],
+  "budgets": {
+    "max_attempts": 1,
+    "timeout_seconds": 300,
+    "max_changed_files": 20,
+    "max_cost_usd": 0,
+    "max_input_tokens": 0,
+    "max_output_tokens": 0
+  },
+  "approval_policy": "ask",
+  "metadata": {
+    "milestone": "01"
+  }
+}

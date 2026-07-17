@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://reliable-agent-platform.local/schemas/evaluation-result/1.0",
+  "title": "EvaluationResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "task_id",
+    "run_id",
+    "worker",
+    "terminal_state",
+    "task_completed",
+    "tests_passed",
+    "evidence_valid",
+    "policy_valid",
+    "attempts",
+    "changed_files",
+    "duration_ms",
+    "artifact_refs",
+    "scores"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "task_id": {
+      "type": "string"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "worker": {
+      "type": "string"
+    },
+    "commit_sha": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "terminal_state": {
+      "type": "string",
+      "enum": [
+        "completed",
+        "awaiting_human",
+        "rejected",
+        "blocked_by_policy",
+        "validation_failed",
+        "worker_failed",
+        "no_progress",
+        "budget_exhausted",
+        "timeout",
+        "system_error"
+      ]
+    },
+    "task_completed": {
+      "type": "boolean"
+    },
+    "tests_passed": {
+      "type": "boolean"
+    },
+    "evidence_valid": {
+      "type": "boolean"
+    },
+    "policy_valid": {
+      "type": "boolean"
+    },
+    "attempts": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "changed_files": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "denied_files_touched": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "duration_ms": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "input_tokens": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "output_tokens": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "estimated_cost_usd": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "failure_category": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "artifact_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "scores": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number"
+      }
+    }
+  }
+}

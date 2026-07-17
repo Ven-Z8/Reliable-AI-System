@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "run_id": "run-001",
+  "created_at": "2026-07-17T12:01:00Z",
+  "artifacts": [
+    {
+      "artifact_id": "artifact-001",
+      "artifact_type": "command_output",
+      "path": "commands/test.txt",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "metadata": {
+        "command": "pytest"
+      }
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "claim-001",
+      "text": "The test command completed successfully.",
+      "artifact_ids": [
+        "artifact-001"
+      ],
+      "verified": false,
+      "verifier": null
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "run_id": "run-001",
+  "event_id": "event-001",
+  "timestamp": "2026-07-17T12:00:00Z",
+  "event_type": "worker_started",
+  "attempt": 1,
+  "payload": {
+    "worker": "mock",
+    "scenario": "success"
+  },
+  "artifact_refs": []
+}

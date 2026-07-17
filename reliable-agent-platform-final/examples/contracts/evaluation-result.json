@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "task_id": "task-001",
+  "run_id": "run-001",
+  "worker": "mock",
+  "commit_sha": null,
+  "terminal_state": "completed",
+  "task_completed": true,
+  "tests_passed": true,
+  "evidence_valid": true,
+  "policy_valid": true,
+  "attempts": 1,
+  "changed_files": 3,
+  "denied_files_touched": [],
+  "duration_ms": 1200,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "estimated_cost_usd": 0,
+  "failure_category": null,
+  "artifact_refs": [
+    "artifact-001"
+  ],
+  "scores": {
+    "completion": 1.0
+  }
+}

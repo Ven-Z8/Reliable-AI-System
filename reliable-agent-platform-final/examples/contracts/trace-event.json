@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "trace_id": "trace-001",
+  "span_id": "span-001",
+  "parent_span_id": null,
+  "run_id": "run-001",
+  "project": "harness",
+  "operation": "worker.run",
+  "agent_name": null,
+  "worker_name": "mock",
+  "model_name": null,
+  "tool_name": null,
+  "state_before": "workspace_prepared",
+  "state_after": "worker_running",
+  "retry_number": 0,
+  "started_at": "2026-07-17T12:00:00Z",
+  "duration_ms": 5,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "estimated_cost_usd": 0,
+  "status": "ok",
+  "error_type": null,
+  "policy_decision": null,
+  "artifact_refs": [],
+  "attributes": {
+    "scenario": "success"
+  }
+}

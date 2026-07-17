@@ -1,0 +1,8 @@
+name: reliable-platform-dev
+description: Planning, TDD, Git workflow, and project-specific reliability rules.
+skills:
+  - plan
+  - test-driven-development
+  - systematic-debugging
+  - github-pr-workflow
+  - reliable-platform-engineering
