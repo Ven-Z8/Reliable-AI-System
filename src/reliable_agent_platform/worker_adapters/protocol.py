@@ -5,29 +5,7 @@ from dataclasses import dataclass, field
 from typing import Protocol
 
 from reliable_agent_platform.contracts import RunContract, WorkerEvent
-
-
-@dataclass
-class WorkerCapabilities:
-    """Worker capabilities - all boolean flags.
-
-    Capabilities do NOT grant permissions. Authorization is enforced
-    by the control plane via RunContract (allowed_paths, denied_paths,
-    allowed_commands, denied_commands, approval_policy).
-    """
-
-    filesystem: bool = False
-    shell: bool = False
-    streaming: bool = False
-    cancellation: bool = False
-    checkpoints: bool = False
-    context_compaction: bool = False
-    sub_agents: bool = False
-    mcp: bool = False
-    human_approval: bool = False
-    sandbox: bool = False
-    cost_reporting: bool = False
-    token_reporting: bool = False
+from reliable_agent_platform.worker_adapters.capabilities import WorkerCapabilities
 
 
 @dataclass
@@ -68,3 +46,13 @@ class WorkerAdapter(Protocol):
     async def run(self, request: WorkerRequest, emit: WorkerEventSink) -> WorkerResult: ...
 
     async def cancel(self, run_id: str) -> None: ...
+
+
+# Re-export WorkerCapabilities for convenience
+__all__ = [
+    "WorkerCapabilities",
+    "WorkerRequest",
+    "WorkerResult",
+    "WorkerEventSink",
+    "WorkerAdapter",
+]

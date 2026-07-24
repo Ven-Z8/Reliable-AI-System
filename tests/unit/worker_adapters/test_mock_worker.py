@@ -210,7 +210,7 @@ class TestMockWorker:
 
         with tempfile.TemporaryDirectory() as tmpdir:
             request = self.create_request(tmpdir)
-            result = await worker.run(request, Sink())
+            await worker.run(request, Sink())
 
         # File should NOT be written outside workspace
         escape_file = Path(tmpdir).parent / "escape.txt"
@@ -252,7 +252,7 @@ class TestMockWorker:
                     events.append(event)
 
             request = self.create_request(str(workspace))
-            result = await worker.run(request, Sink())
+            await worker.run(request, Sink())
 
             # File should NOT be written to outside directory
             assert not target.exists() or target.read_text() == "outside"
@@ -323,7 +323,7 @@ class TestMockWorker:
         worker = MockWorker()
         caps = worker.capabilities()
         assert caps.filesystem is True
-        assert caps.shell is True
+        assert caps.shell_command is True
         assert caps.streaming is True
         assert caps.cancellation is True
         assert caps.checkpoints is True

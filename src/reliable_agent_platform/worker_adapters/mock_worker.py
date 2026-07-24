@@ -1,6 +1,6 @@
 """Deterministic MockWorker implementation."""
 
-from collections.abc import Callable
+from collections.abc import Awaitable, Callable
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -54,7 +54,7 @@ class MockWorker(WorkerAdapter):
         """Return all capabilities as True for testing."""
         return WorkerCapabilities(
             filesystem=True,
-            shell=True,
+            shell_command=True,
             streaming=True,
             cancellation=True,
             checkpoints=True,
@@ -181,7 +181,7 @@ class MockWorker(WorkerAdapter):
     async def _run_success(
         self,
         request: WorkerRequest,
-        emit_event,
+        emit_event: Callable[[EventType, dict[str, object] | None], object],
         changed_files: list[str],
     ) -> None:
         """Success scenario: full event sequence + file write."""
@@ -199,24 +199,32 @@ class MockWorker(WorkerAdapter):
         await emit_event(EventType.CHECKPOINT, {"step": "files_written"})
         await emit_event(EventType.WORKER_COMPLETED, {"success": True})
 
-    async def _run_worker_failure(self, emit_event) -> None:
+    async def _run_worker_failure(
+        self, emit_event: Callable[[EventType, dict[str, object] | None], object]
+    ) -> None:
         """Worker failure scenario."""
         await emit_event(EventType.WORKER_STARTED, {"worker": "mock", "scenario": "worker_failure"})
         await emit_event(EventType.WORKER_FAILED, {"error": "simulated failure"})
 
-    async def _run_timeout(self, emit_event) -> None:
+    async def _run_timeout(
+        self, emit_event: Callable[[EventType, dict[str, object] | None], object]
+    ) -> None:
         """Timeout scenario."""
         await emit_event(EventType.WORKER_STARTED, {"worker": "mock", "scenario": "timeout"})
         await emit_event(EventType.WARNING, {"message": "timeout approaching"})
         await emit_event(EventType.WORKER_FAILED, {"error": "timeout"})
 
-    async def _run_cancelled(self, emit_event) -> None:
+    async def _run_cancelled(
+        self, emit_event: Callable[[EventType, dict[str, object] | None], object]
+    ) -> None:
         """Cancelled scenario."""
         await emit_event(EventType.WORKER_STARTED, {"worker": "mock", "scenario": "cancelled"})
         await emit_event(EventType.WARNING, {"message": "cancelled by control plane"})
         await emit_event(EventType.WORKER_FAILED, {"error": "cancelled"})
 
-    async def _run_reported_success_without_evidence(self, emit_event) -> None:
+    async def _run_reported_success_without_evidence(
+        self, emit_event: Callable[[EventType, dict[str, object] | None], object]
+    ) -> None:
         """Worker claims success but produces no evidence events."""
         await emit_event(
             EventType.WORKER_STARTED,
@@ -230,7 +238,7 @@ class MockWorker(WorkerAdapter):
     async def _run_repeated_equivalent_action(
         self,
         request: WorkerRequest,
-        emit_event,
+        emit_event: Callable[[EventType, dict[str, object] | None], object],
         changed_files: list[str],
     ) -> None:
         """Repeated equivalent action - duplicate tool requests and file writes."""

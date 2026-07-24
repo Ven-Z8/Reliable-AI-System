@@ -12,7 +12,7 @@ class WorkerCapabilities:
     """
 
     filesystem: bool = False
-    shell: bool = False
+    shell_command: bool = False
     streaming: bool = False
     cancellation: bool = False
     checkpoints: bool = False

@@ -86,7 +86,9 @@ class TestAdversarialContractBoundaries:
             data["schema_version"] = "2.0"
             with pytest.raises(ValidationError) as exc:
                 model_class.model_validate(data)
-            assert "schema_version" in str(exc.value), f"{model_class.__name__} should reject unknown version"
+            assert "schema_version" in str(exc.value), (
+                f"{model_class.__name__} should reject unknown version"
+            )
 
     def test_invalid_event_type_rejected(self):
         """Invalid EventType must be rejected."""

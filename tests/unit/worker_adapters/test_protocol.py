@@ -15,7 +15,7 @@ class TestWorkerCapabilities:
         """Capabilities must be boolean flags for listed capabilities."""
         caps = WorkerCapabilities(
             filesystem=True,
-            shell=False,
+            shell_command=False,
             streaming=True,
             cancellation=True,
             checkpoints=True,
@@ -28,7 +28,7 @@ class TestWorkerCapabilities:
             token_reporting=True,
         )
         assert caps.filesystem is True
-        assert caps.shell is False
+        assert caps.shell_command is False
         assert caps.streaming is True
         assert caps.cancellation is True
         assert caps.checkpoints is True
@@ -44,7 +44,7 @@ class TestWorkerCapabilities:
         """Capabilities object must not have any authorization/permission fields."""
         caps = WorkerCapabilities(
             filesystem=True,
-            shell=True,
+            shell_command=True,
             streaming=True,
             cancellation=True,
             checkpoints=True,
@@ -66,7 +66,7 @@ class TestWorkerCapabilities:
         """Default capabilities should be all False (explicit opt-in)."""
         caps = WorkerCapabilities()
         assert caps.filesystem is False
-        assert caps.shell is False
+        assert caps.shell_command is False
         assert caps.streaming is False
         assert caps.cancellation is False
         assert caps.checkpoints is False

@@ -113,7 +113,8 @@ class TestRunContract:
         assert "max_attempts" in str(exc.value)
 
     def test_optional_fields_can_be_none(self):
-        """Optional fields (goal_id, allowed_commands, denied_commands) accept null; metadata defaults to empty dict."""
+        """Optional fields (goal_id, allowed_commands, denied_commands)
+        accept null; metadata defaults to empty dict."""
         with open("examples/contracts/run-contract.json") as f:
             data = json.load(f)
         data["goal_id"] = None
