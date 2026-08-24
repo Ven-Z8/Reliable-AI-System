@@ -15,6 +15,8 @@ from reliable_agent_platform.harness.store import (
     JournalCorruptionError,
 )
 
+pytestmark = pytest.mark.adversarial
+
 
 def _drive_to_running(run_id: str = "run-adv") -> RunStateMachine:
     machine = RunStateMachine(run_id=run_id)

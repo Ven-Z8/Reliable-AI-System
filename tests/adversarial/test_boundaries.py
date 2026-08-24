@@ -23,6 +23,8 @@ from reliable_agent_platform.contracts import (
 from reliable_agent_platform.contracts.run_contract import Budgets, Repository
 from reliable_agent_platform.worker_adapters import MockWorker, WorkerRequest
 
+pytestmark = pytest.mark.adversarial
+
 
 class TestAdversarialContractBoundaries:
     """Adversarial tests proving contract validation rejects forbidden inputs."""
@@ -346,7 +348,7 @@ class TestAdversarialWorkerBoundaries:
             symlink = workspace / "link.txt"
             target = outside_dir / "target.txt"
             target.write_text("outside")
-            target.symlink_to(symlink)  # Note: reversed for Windows
+            symlink.symlink_to(target)
 
             worker = MockWorker(
                 scenario="success",
