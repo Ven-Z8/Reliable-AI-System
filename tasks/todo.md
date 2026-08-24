@@ -5,20 +5,19 @@ Convention: write the acceptance test FIRST, then make it green (TDD).
 
 ## Phase 0 — Repo hygiene
 
-- [ ] Task 0.1: Outsider-facing README top (problem → architecture → quickstart → badges); consolidate Hermes ops docs into docs/HERMES_SETUP.md
+- [x] Task 0.1: Outsider-facing README top (problem → architecture → quickstart → badges); consolidate Hermes ops docs into docs/HERMES_SETUP.md
   - Accept: above-the-fold understandable in 60s; no agent-operating instructions on the front page
   - Verify: links resolve; render check after push
-- [ ] Task 0.2: Push M1 public to github.com/Ven-Z8/reliable-agent-platform (owner creates empty repo; agent adds remote + pushes)
+- [x] Task 0.2: Push M1 public to github.com/Ven-Z8/Reliable-AI-System
   - Accept: main pushed; Actions CI green on GitHub
 
 ## Phase M2 — Harness control plane (ACC-H1…H9, S1)
 
-- [ ] Task 1: Run state machine + durable store — ACC-H1
+- [x] Task 1: Run state machine + durable store — ACC-H1 ✅ 2026-08-24
   - Accept: illegal transitions raise; state survives restart; journal replayable
-  - Verify: `pytest tests/unit/harness tests/adversarial/test_state_transitions.py`
-- [ ] Task 2: Contract validation gate — ACC-H2
-  - Accept: malformed RunContract rejected pre-execution with reason codes; valid pass unchanged
-- Checkpoint A: gates green → commit + push
+- [x] Task 2: Contract validation gate — ACC-H2 ✅ 2026-08-24
+  - Accept: malformed RunContract rejected pre-execution with reason codes; valid pass unchanged (`harness/validation.py`)
+- Checkpoint A: gates green → commit + push ✅ 2026-08-24 (Docker Linux matrix verified pre-push)
 - [ ] Task 3: Workspace + path/command policy engine — ACC-H3
   - Accept: escape/symlink/forbidden-command blocked BEFORE execution; hypothesis property tests pass
 - [ ] Task 4: Budget engines (time/attempt/token/cost/files) — ACC-H4
