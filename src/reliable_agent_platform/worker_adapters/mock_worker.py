@@ -181,7 +181,7 @@ class MockWorker(WorkerAdapter):
     async def _run_success(
         self,
         request: WorkerRequest,
-        emit_event: Callable[[EventType, dict[str, object] | None], object],
+        emit_event: Callable[[EventType, dict[str, object] | None], Awaitable[None]],
         changed_files: list[str],
     ) -> None:
         """Success scenario: full event sequence + file write."""
@@ -200,14 +200,14 @@ class MockWorker(WorkerAdapter):
         await emit_event(EventType.WORKER_COMPLETED, {"success": True})
 
     async def _run_worker_failure(
-        self, emit_event: Callable[[EventType, dict[str, object] | None], object]
+        self, emit_event: Callable[[EventType, dict[str, object] | None], Awaitable[None]]
     ) -> None:
         """Worker failure scenario."""
         await emit_event(EventType.WORKER_STARTED, {"worker": "mock", "scenario": "worker_failure"})
         await emit_event(EventType.WORKER_FAILED, {"error": "simulated failure"})
 
     async def _run_timeout(
-        self, emit_event: Callable[[EventType, dict[str, object] | None], object]
+        self, emit_event: Callable[[EventType, dict[str, object] | None], Awaitable[None]]
     ) -> None:
         """Timeout scenario."""
         await emit_event(EventType.WORKER_STARTED, {"worker": "mock", "scenario": "timeout"})
@@ -215,7 +215,7 @@ class MockWorker(WorkerAdapter):
         await emit_event(EventType.WORKER_FAILED, {"error": "timeout"})
 
     async def _run_cancelled(
-        self, emit_event: Callable[[EventType, dict[str, object] | None], object]
+        self, emit_event: Callable[[EventType, dict[str, object] | None], Awaitable[None]]
     ) -> None:
         """Cancelled scenario."""
         await emit_event(EventType.WORKER_STARTED, {"worker": "mock", "scenario": "cancelled"})
@@ -223,7 +223,7 @@ class MockWorker(WorkerAdapter):
         await emit_event(EventType.WORKER_FAILED, {"error": "cancelled"})
 
     async def _run_reported_success_without_evidence(
-        self, emit_event: Callable[[EventType, dict[str, object] | None], object]
+        self, emit_event: Callable[[EventType, dict[str, object] | None], Awaitable[None]]
     ) -> None:
         """Worker claims success but produces no evidence events."""
         await emit_event(
@@ -238,7 +238,7 @@ class MockWorker(WorkerAdapter):
     async def _run_repeated_equivalent_action(
         self,
         request: WorkerRequest,
-        emit_event: Callable[[EventType, dict[str, object] | None], object],
+        emit_event: Callable[[EventType, dict[str, object] | None], Awaitable[None]],
         changed_files: list[str],
     ) -> None:
         """Repeated equivalent action - duplicate tool requests and file writes."""

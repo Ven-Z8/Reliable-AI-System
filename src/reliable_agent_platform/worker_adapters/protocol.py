@@ -50,9 +50,9 @@ class WorkerAdapter(Protocol):
 
 # Re-export WorkerCapabilities for convenience
 __all__ = [
+    "WorkerAdapter",
     "WorkerCapabilities",
+    "WorkerEventSink",
     "WorkerRequest",
     "WorkerResult",
-    "WorkerEventSink",
-    "WorkerAdapter",
 ]
